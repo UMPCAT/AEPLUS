@@ -261,7 +261,7 @@ function jsonpRequest(url, params) {
       terminado = true;
       limpiar();
       reject(new Error('Tiempo de espera agotado en la consulta.'));
-    }, 20000);
+    }, 100000);
 
     window[callbackName] = function(data) {
       if (terminado) return;
