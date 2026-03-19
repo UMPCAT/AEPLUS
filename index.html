@@ -174,14 +174,34 @@ footer{background:#003366;color:rgba(255,255,255,.4);text-align:center;padding:1
     </div>
     <div class="card-bd">
       <div class="search-row">
-        <div class="field">
-          <label for="cuil">CUIL / CUIT del titular</label>
-          <div class="iw">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <input type="text" id="cuil" placeholder="Ej: 27236235470" maxlength="13"
-              oninput="this.value=this.value.replace(/\D/g,'')"
-              onkeydown="if(event.key==='Enter')buscar()">
-          </div>
+  <div class="field">
+    <label for="cuil">CUIL / CUIT del titular</label>
+    <div class="iw">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <input type="text" id="cuil" placeholder="Ej: 27236235470" maxlength="13"
+        oninput="this.value=this.value.replace(/\D/g,'')"
+        onkeydown="if(event.key==='Enter')buscar()">
+    </div>
+    <span class="hint">Sin guiones ni espacios · 10 u 11 dígitos</span>
+  </div>
+
+  <div class="field" style="max-width:220px;">
+    <label for="marca">Marca</label>
+    <div class="iw">
+      <select id="marca" style="width:100%;padding:10px 12px;border:1.5px solid #c4cedd;border-radius:4px;font-family:'Open Sans',Arial,sans-serif;font-size:.9rem;color:#1a2a3a;background:#fafcff;outline:none;">
+        <option value="TODAS">Todas</option>
+        <option value="VISA">Visa</option>
+        <option value="MASTERCARD">Mastercard</option>
+      </select>
+    </div>
+    <span class="hint">Podés limitar la búsqueda por marca</span>
+  </div>
+
+  <button class="btn" onclick="buscar()" id="btnB">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    Consultar
+  </button>
+</div>
           <span class="hint">Sin guiones ni espacios · 10 u 11 dígitos</span>
         </div>
         <button class="btn" onclick="buscar()" id="btnB">
