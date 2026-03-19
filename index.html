@@ -256,17 +256,9 @@ function jsonpRequest(url, params) {
       }
     }
 
-    const timer = setTimeout(function() {
-      if (terminado) return;
-      terminado = true;
-      limpiar();
-      reject(new Error('Tiempo de espera agotado en la consulta.'));
-    }, 100000);
-
     window[callbackName] = function(data) {
       if (terminado) return;
       terminado = true;
-      clearTimeout(timer);
       limpiar();
       resolve(data);
     };
@@ -274,7 +266,6 @@ function jsonpRequest(url, params) {
     script.onerror = function() {
       if (terminado) return;
       terminado = true;
-      clearTimeout(timer);
       limpiar();
       reject(new Error('Error cargando la respuesta JSONP del Web App.'));
     };
