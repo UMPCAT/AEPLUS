@@ -46,15 +46,16 @@ body{font-family:'Open Sans',Arial,sans-serif;background:#f0f4f8;color:#1a2a3a;m
 
 /* FORM */
 .search-row{display:flex;gap:12px;align-items:flex-end}
-@media(max-width:500px){.search-row{flex-direction:column}}
+@media(max-width:700px){.search-row{flex-direction:column;align-items:stretch}}
 .field{flex:1;display:flex;flex-direction:column;gap:5px}
 label{font-size:.72rem;font-weight:700;color:#3a4e64;text-transform:uppercase;letter-spacing:.08em}
 .iw{position:relative;display:flex;align-items:center}
 .iw svg{position:absolute;left:10px;width:15px;height:15px;color:#a0aab4;pointer-events:none}
-input[type=text]{width:100%;padding:10px 12px 10px 34px;border:1.5px solid #c4cedd;border-radius:4px;font-family:'Open Sans',Arial,sans-serif;font-size:.9rem;color:#1a2a3a;background:#fafcff;transition:border-color .16s,box-shadow .16s;outline:none}
-input[type=text]:focus{border-color:#003366;background:#fff;box-shadow:0 0 0 3px rgba(0,51,102,.07)}
+input[type=text], select{width:100%;padding:10px 12px 10px 34px;border:1.5px solid #c4cedd;border-radius:4px;font-family:'Open Sans',Arial,sans-serif;font-size:.9rem;color:#1a2a3a;background:#fafcff;transition:border-color .16s,box-shadow .16s;outline:none}
+select{padding-left:12px}
+input[type=text]:focus, select:focus{border-color:#003366;background:#fff;box-shadow:0 0 0 3px rgba(0,51,102,.07)}
 .hint{font-size:.68rem;color:#a0aab4}
-.btn{padding:10px 22px;background:#003366;color:#fff;border:none;border-radius:4px;font-family:'Open Sans',Arial,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background .16s,transform .1s;white-space:nowrap;letter-spacing:.02em}
+.btn{padding:10px 22px;background:#003366;color:#fff;border:none;border-radius:4px;font-family:'Open Sans',Arial,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background .16s,transform .1s;white-space:nowrap;letter-spacing:.02em;height:46px}
 .btn:hover{background:#00509e}
 .btn:active{transform:scale(.98)}
 .btn:disabled{background:#a0aab4;cursor:not-allowed;transform:none}
@@ -174,42 +175,39 @@ footer{background:#003366;color:rgba(255,255,255,.4);text-align:center;padding:1
     </div>
     <div class="card-bd">
       <div class="search-row">
-  <div class="field">
-    <label for="cuil">CUIL / CUIT del titular</label>
-    <div class="iw">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <input type="text" id="cuil" placeholder="Ej: 27236235470" maxlength="13"
-        oninput="this.value=this.value.replace(/\D/g,'')"
-        onkeydown="if(event.key==='Enter')buscar()">
-    </div>
-    <span class="hint">Sin guiones ni espacios · 10 u 11 dígitos</span>
-  </div>
-
-  <div class="field" style="max-width:220px;">
-    <label for="marca">Marca</label>
-    <div class="iw">
-      <select id="marca" style="width:100%;padding:10px 12px;border:1.5px solid #c4cedd;border-radius:4px;font-family:'Open Sans',Arial,sans-serif;font-size:.9rem;color:#1a2a3a;background:#fafcff;outline:none;">
-        <option value="TODAS">Todas</option>
-        <option value="VISA">Visa</option>
-        <option value="MASTERCARD">Mastercard</option>
-      </select>
-    </div>
-    <span class="hint">Podés limitar la búsqueda por marca</span>
-  </div>
-
-  <button class="btn" onclick="buscar()" id="btnB">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    Consultar
-  </button>
-</div>
+        <div class="field">
+          <label for="cuil">CUIL / CUIT del titular</label>
+          <div class="iw">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input type="text" id="cuil" placeholder="Ej: 27236235470" maxlength="13"
+              oninput="this.value=this.value.replace(/\D/g,'')"
+              onkeydown="if(event.key==='Enter')buscar()">
+          </div>
           <span class="hint">Sin guiones ni espacios · 10 u 11 dígitos</span>
         </div>
+
+        <div class="field" style="max-width:220px;">
+          <label for="marca">Marca</label>
+          <div class="iw">
+            <select id="marca">
+              <option value="TODAS">Todas</option>
+              <option value="VISA">Visa</option>
+              <option value="MASTERCARD">Mastercard</option>
+            </select>
+          </div>
+          <span class="hint">Podés limitar la búsqueda por marca</span>
+        </div>
+
         <button class="btn" onclick="buscar()" id="btnB">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           Consultar
         </button>
       </div>
-      <div id="loader"><div class="ring"></div><p class="ltxt">Consultando base de datos…</p></div>
+
+      <div id="loader">
+        <div class="ring"></div>
+        <p class="ltxt">Consultando bases Visa, Mastercard y Reporte de Aceptación…</p>
+      </div>
     </div>
   </div>
 
@@ -227,12 +225,12 @@ function buscar() {
   const out = document.getElementById('res');
 
   if (!cuil) {
-    out.innerHTML = msj('error','Campo requerido','Ingresá el CUIL/CUIT del titular.');
+    out.innerHTML = msj('error', 'Campo requerido', 'Ingresá el CUIL/CUIT del titular.');
     return;
   }
 
   if (cuil.length < 10 || cuil.length > 11) {
-    out.innerHTML = msj('error','CUIL inválido','El CUIL/CUIT debe tener 10 u 11 dígitos.');
+    out.innerHTML = msj('error', 'CUIL inválido', 'El CUIL/CUIT debe tener 10 u 11 dígitos.');
     return;
   }
 
@@ -244,28 +242,14 @@ function buscar() {
     tarjeta: '',
     marca: marca
   })
-    .then(function(data) {
-      tog(false);
-      render(data, cuil);
-    })
-    .catch(function(err) {
-      tog(false);
-      out.innerHTML = msj('error','Sin respuesta', e(err.message || 'No se pudo conectar con el backend.'));
-    });
-}
-
-  out.innerHTML = '';
-  tog(true);
-
-  jsonpRequest(GAS_URL, { cuil: cuil, tarjeta: '' })
-    .then(function(data) {
-      tog(false);
-      render(data, cuil);
-    })
-    .catch(function(err) {
-      tog(false);
-      out.innerHTML = msj('error','Sin respuesta', e(err.message || 'No se pudo conectar con el backend.'));
-    });
+  .then(function(data) {
+    tog(false);
+    render(data, cuil);
+  })
+  .catch(function(err) {
+    tog(false);
+    out.innerHTML = msj('error', 'Sin respuesta', e(err.message || 'No se pudo conectar con el backend.'));
+  });
 }
 
 function jsonpRequest(url, params) {
@@ -322,22 +306,22 @@ function render(data, cuil) {
   const out = document.getElementById('res');
 
   if (!data) {
-    out.innerHTML = msj('error','Error','No se recibió respuesta del servidor.');
+    out.innerHTML = msj('error', 'Error', 'No se recibió respuesta del servidor.');
     return;
   }
 
   if (!data.ok && data.error) {
-    out.innerHTML = msj('error','Error', e(data.error));
+    out.innerHTML = msj('error', 'Error', e(data.error));
     return;
   }
 
   if (!data.ok && data.sinDatos) {
-    out.innerHTML = msj('warning','Sin resultados','No se encontraron registros para el CUIL/CUIT <strong>' + e(cuil) + '</strong> en ninguna de las bases del programa.');
+    out.innerHTML = msj('warning', 'Sin resultados', 'No se encontraron registros para el CUIL/CUIT <strong>' + e(cuil) + '</strong> en ninguna de las bases del programa.');
     return;
   }
 
   if (!data.resultados || !Array.isArray(data.resultados)) {
-    out.innerHTML = msj('error','Error','La respuesta recibida no tiene el formato esperado.');
+    out.innerHTML = msj('error', 'Error', 'La respuesta recibida no tiene el formato esperado.');
     return;
   }
 
@@ -355,7 +339,7 @@ function render(data, cuil) {
 }
 
 function ficha(r) {
-  const nov = r.novedad || { tipo:'REVISAR', label:'REVISAR MANUALMENTE', detalle:'Registro sin clasificación.' };
+  const nov = r.novedad || { tipo: 'REVISAR', label: 'REVISAR MANUALMENTE', detalle: 'Registro sin clasificación.' };
   const ini = ((((r.nombre || '')[0] || '') + ((r.apellido || '')[0] || '')).toUpperCase()) || '??';
 
   const campos = [
