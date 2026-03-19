@@ -219,10 +219,11 @@ footer{background:#003366;color:rgba(255,255,255,.4);text-align:center;padding:1
 <footer>Banco de la Nación Argentina &nbsp;·&nbsp; Gerencia Zonal NOA Oeste &nbsp;·&nbsp; Sistema de uso interno exclusivo</footer>
 
 <script>
-const GAS_URL = "https://script.google.com/macros/s/AKfycbyWXmu4XctwDzj_7L35t_tGVW2Ssx5pBVKDF_MHJ2Hfss6VV_w0RylzganZ0_oRsZNY/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbzK5PITcb77BNw0RthXYKiJAdJMJPLxuK-bTJUJ_bmJDW_BdoFkcNKv7utHeYQy6rWo/exec";
 
 function buscar() {
   const cuil = (document.getElementById('cuil').value || '').trim().replace(/\D/g, '');
+  const marca = (document.getElementById('marca').value || 'TODAS').trim();
   const out = document.getElementById('res');
 
   if (!cuil) {
@@ -234,6 +235,24 @@ function buscar() {
     out.innerHTML = msj('error','CUIL inválido','El CUIL/CUIT debe tener 10 u 11 dígitos.');
     return;
   }
+
+  out.innerHTML = '';
+  tog(true);
+
+  jsonpRequest(GAS_URL, {
+    cuil: cuil,
+    tarjeta: '',
+    marca: marca
+  })
+    .then(function(data) {
+      tog(false);
+      render(data, cuil);
+    })
+    .catch(function(err) {
+      tog(false);
+      out.innerHTML = msj('error','Sin respuesta', e(err.message || 'No se pudo conectar con el backend.'));
+    });
+}
 
   out.innerHTML = '';
   tog(true);
